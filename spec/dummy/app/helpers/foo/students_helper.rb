@@ -1,0 +1,2 @@
+module Foo::StudentsHelper
+end
