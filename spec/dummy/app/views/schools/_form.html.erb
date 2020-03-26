@@ -16,6 +16,17 @@
     <%= form.text_field :name %>
   </div>
 
+  <fieldset>
+    <legend>Students</legend>
+    <%= form.fields_for :students do |student_form| %>
+      <h2>Student #<%= student_form.object.id %></h2>
+      <div class="field">
+        <%= student_form.label :name %>
+        <%= student_form.text_field :name %>
+      </div>
+    <% end %>
+  </fieldset>
+
   <div class="actions">
     <%= form.submit %>
   </div>
