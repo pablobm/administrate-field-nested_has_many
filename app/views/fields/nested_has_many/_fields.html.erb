@@ -1,9 +1,9 @@
 <div class="nested-fields">
-  <% field.nested_fields_for_builder(f).each do |attribute| -%>
+  <% field.nested_fields_for_builder(nested_form).each do |attribute| -%>
     <div class="field-unit field-unit--<%= attribute.html_class %>">
-      <%= render_field attribute, f: f %>
+      <%= render_field attribute, f: nested_form %>
     </div>
   <% end -%>
 
-  <%= link_to_remove_association I18n.t("administrate.fields.nested_has_many.remove", resource: field.associated_class_name.titleize), f %>
+  <%= link_to_remove_association I18n.t("administrate.fields.nested_has_many.remove", resource: field.associated_class_name.titleize), nested_form %>
 </div>

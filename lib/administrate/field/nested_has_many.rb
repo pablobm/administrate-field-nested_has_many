@@ -25,14 +25,14 @@ module Administrate
         end
       end
 
-      def nested_fields_for_builder(form_builder)
-        return nested_fields unless form_builder.index.is_a? Integer
+      def nested_fields_for_builder(nested_form)
+        return nested_fields unless nested_form.index.is_a? Integer
 
         nested_fields.each do |nested_field|
           next if nested_field.resource.blank?
 
           # inject current data into field
-          resource = nested_field.resource[form_builder.index]
+          resource = nested_field.resource[nested_form.index]
           nested_field.instance_variable_set(
             "@data",
             resource.send(nested_field.attribute),
