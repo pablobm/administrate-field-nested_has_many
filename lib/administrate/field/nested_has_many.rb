@@ -19,16 +19,16 @@ module Administrate
 
       DEFAULT_ATTRIBUTES = %i(id _destroy).freeze
 
-      def nested_fields
-        associated_form.attributes.reject do |nested_field|
+      def nested_fields(nested_form)
+        associated_form(nested_form).attributes.reject do |nested_field|
           skipped_fields.include?(nested_field.attribute)
         end
       end
 
       def nested_fields_for_builder(nested_form)
-        return nested_fields unless nested_form.index.is_a? Integer
+        return nested_fields(nested_form) unless nested_form.index.is_a? Integer
 
-        nested_fields.each do |nested_field|
+        nested_fields(nested_form).each do |nested_field|
           next if nested_field.resource.blank?
 
           # inject current data into field
@@ -72,8 +72,8 @@ module Administrate
         )
       end
 
-      def associated_form
-        Administrate::Page::Form.new(associated_dashboard, data)
+      def associated_form(form)
+        Administrate::Page::Form.new(associated_dashboard, form.object)
       end
 
       private
